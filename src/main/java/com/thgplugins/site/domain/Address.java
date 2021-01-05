@@ -11,19 +11,29 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(of = {"id"})
 @Entity
-public class City implements Serializable {
+public class Address implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
 
     @ManyToOne
-    @JoinColumn(name = "state_id")
-    private State state;
+    @JoinColumn(name = "client_id")
+    private Client client;
 
-    public City(){ }
+    private String logradouro;
+    private String number;
+    private String complement;
+    private String district;
+
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private City city;
+
+    private String zipcode;
+
+    public Address(){}
 
 }

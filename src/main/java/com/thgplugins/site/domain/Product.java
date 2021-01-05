@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(of = {"id"})
 @Entity
 public class Product implements Serializable {
 

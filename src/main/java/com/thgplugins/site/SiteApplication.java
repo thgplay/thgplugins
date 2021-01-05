@@ -1,13 +1,8 @@
 package com.thgplugins.site;
 
-import com.thgplugins.site.domain.Category;
-import com.thgplugins.site.domain.City;
-import com.thgplugins.site.domain.Product;
-import com.thgplugins.site.domain.State;
-import com.thgplugins.site.repositories.CategoryRepository;
-import com.thgplugins.site.repositories.CityRepository;
-import com.thgplugins.site.repositories.ProductRepository;
-import com.thgplugins.site.repositories.StateRepository;
+import com.thgplugins.site.domain.*;
+import com.thgplugins.site.domain.enums.ClientType;
+import com.thgplugins.site.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -30,6 +25,12 @@ public class SiteApplication implements CommandLineRunner {
     @Autowired
     private StateRepository stateRepository;
 
+    @Autowired
+    private ClientRepository clientRepository;
+
+    @Autowired
+    private AddressRepository addressRepository;
+
     public static void main(String[] args) {
         SpringApplication.run(SiteApplication.class, args);
 
@@ -47,6 +48,31 @@ public class SiteApplication implements CommandLineRunner {
 
         state1.getCities().addAll(Arrays.asList(city1, city2));
         state2.getCities().add(city3);
+
+        stateRepository.saveAll(Arrays.asList(state1, state2));
+        cityRepository.saveAll(Arrays.asList(city1, city2, city3));
+
+        Client cli1 = new Client(null, "Gabriel", "gabriel@gmail.com", "060.932.206-02", ClientType.FISICAL);
+        cli1.getPhones().addAll(Arrays.asList("34 99643-1496", "34 98805-6047"));
+
+        Address add1 = new Address(null, cli1, "Rua das Rosas", "295","","Cidade Jardim", city1, "38412-172");
+        Address add2 = new Address(null, cli1, "Rua Cabral", "302","","Tubalina", city1, "38412-082");
+
+        cli1.getAddresses().addAll(Arrays.asList(add1,add2));
+
+        Client cli2 = new Client(null, "Ana Luisa", "analuisa@gmail.com", "111.059.358-08", ClientType.FISICAL);
+        cli1.getPhones().add("34 95812-8611");
+
+        Address add3 = new Address(null, cli2, "Rua Monan Ribeiro", "909", "Apt 603, Bloco 3", "Alto Umuarama", city1, "38412-068");
+        cli2.getAddresses().add(add3);
+
+
+        Client cli3 = new Client(null, "Liliane Gonçalves", "liliane@gmail.com", "059.887.669-02", ClientType.JURIDICAL);
+
+
+        clientRepository.saveAll(Arrays.asList(cli1, cli2, cli3));
+
+        addressRepository.saveAll(Arrays.asList(add1, add2, add3));
 
     }
 }
