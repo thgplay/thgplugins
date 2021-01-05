@@ -1,9 +1,13 @@
 package com.thgplugins.site;
 
 import com.thgplugins.site.domain.Category;
+import com.thgplugins.site.domain.City;
 import com.thgplugins.site.domain.Product;
+import com.thgplugins.site.domain.State;
 import com.thgplugins.site.repositories.CategoryRepository;
+import com.thgplugins.site.repositories.CityRepository;
 import com.thgplugins.site.repositories.ProductRepository;
+import com.thgplugins.site.repositories.StateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,6 +24,12 @@ public class SiteApplication implements CommandLineRunner {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private CityRepository cityRepository;
+
+    @Autowired
+    private StateRepository stateRepository;
+
     public static void main(String[] args) {
         SpringApplication.run(SiteApplication.class, args);
 
@@ -28,24 +38,15 @@ public class SiteApplication implements CommandLineRunner {
     @Override
     public void run(String... args) {
 
-        Category cat1 = new Category(null, "Casa");
-        Category cat2 = new Category(null, "Carro");
+        State state1 = new State(null, "Minas Gerais");
+        State state2 = new State(null, "São Paulo");
 
-        Product p1 = new Product(null, "Perfume", 25.50);
-        Product p2 = new Product(null, "Volante", 200.00);
-        Product p3 = new Product(null, "Marcha", 850.00);
+        City city1 = new City(null, "Uberlândia", state1);
+        City city2 = new City(null, "Uberaba", state1);
+        City city3 = new City(null, "Marília", state2);
 
-        cat1.getProducts().add(p1);
-        cat2.getProducts().addAll(Arrays.asList(p1,p2,p3));
-
-        p1.getCategories().addAll(Arrays.asList(cat1,cat2));
-        p2.getCategories().add(cat2);
-        p3.getCategories().add(cat2);
-
-
-
-//        categoryRepository.saveAll(Arrays.asList(cat1,cat2));
-//        productRepository.saveAll(Arrays.asList(p1,p2,p3));
+        state1.getCities().addAll(Arrays.asList(city1, city2));
+        state2.getCities().add(city3);
 
     }
 }
