@@ -12,24 +12,26 @@ import java.util.List;
 @Data
 @EqualsAndHashCode
 @Entity
-public class Category implements Serializable {
+public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String nome;
+    private Double price;
 
-    @ManyToMany(mappedBy = "categories")
-    private List<Product> products = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(name = "product_category",joinColumns = @JoinColumn(name = "product_id"),inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private List<Category> categories = new ArrayList<>();
 
+    public Product(){}
 
-    public Category(){}
-
-    public Category(Integer id, String nome) {
+    public Product(Integer id, String nome, Double price) {
         this.id = id;
         this.nome = nome;
+        this.price = price;
     }
-
 }
