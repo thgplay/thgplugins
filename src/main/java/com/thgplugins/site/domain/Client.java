@@ -1,5 +1,6 @@
 package com.thgplugins.site.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.thgplugins.site.domain.enums.ClientType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -31,6 +32,7 @@ public class Client implements Serializable {
     private Integer clientType;
 
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "client")
     private List<Address> addresses = new ArrayList<>();
 
