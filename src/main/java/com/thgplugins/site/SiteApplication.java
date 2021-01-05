@@ -44,8 +44,8 @@ public class SiteApplication implements CommandLineRunner {
 
 
 
-        categoryRepository.saveAll(Arrays.asList(cat1,cat2));
-        productRepository.saveAll(Arrays.asList(p1,p2,p3));
+//        categoryRepository.saveAll(Arrays.asList(cat1,cat2));
+//        productRepository.saveAll(Arrays.asList(p1,p2,p3));
 
     }
 }

@@ -1,6 +1,6 @@
 package com.thgplugins.site.domain;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -23,6 +23,7 @@ public class Product implements Serializable {
     private String nome;
     private Double price;
 
+    @JsonBackReference
     @ManyToMany
     @JoinTable(name = "product_category",joinColumns = @JoinColumn(name = "product_id"),inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categories = new ArrayList<>();
